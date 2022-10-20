@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
 /**
  * _printf - entry point
  * @format: character string
@@ -6,11 +8,12 @@
  */
 int _printf(const char *format, ...)
 {
-	int (*ptrfunc)(va_list);
+	int (*ptrfunc)(va_list, flag_t *);
 	const char *p;
 	va_list args;
+	flag_t flags = {0, 0, 0};
 
-	registered int count = 0;
+	register int count = 0;
 
 
 	va_start(args, format);
@@ -33,9 +36,9 @@ int _printf(const char *format, ...)
 				count +=_putchar('%');
 				continue;
 			}
-			ptrfunc = get_print(*p);
+			/*ptrfunc = get_print(*p);*/
 			count += (ptrfunc)
-				? ptrfunc(args)
+				? ptrfunc(args, &flags)
 				: _printf("%%%c", *p);
 		}
 		else
