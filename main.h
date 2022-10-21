@@ -17,6 +17,9 @@ typedef struct flag
 
 int _printf(const char *format, ...);
 int _putchar(char c);
+int (*get_print(char s))(va_list, flag_t *);
+int get_flag(char s, flag_t *f);
+int _puts(char *str);
 
 
 #endif
