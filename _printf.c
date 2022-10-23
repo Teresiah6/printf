@@ -1,33 +1,16 @@
 #include "main.h"
-
 #include <stdarg.h>
 
-
-
 /**
-
  * _printf - formatted output conversion and print data.
-
  * @format: input string.
-
  * check_format - checks if there is a valid format specifier
-
  * @format: possible valid format specifier
-
- *
-
- * Return: number of chars printed.
-
- * Return: pointer to valid function or NULL
-
+ * Return: number of chars printed and * to () or NULL
  */
 
-
-
 int (*check_format(const char *format))(va_list)
-
 {
-
 	int i = 0;
 
 	print_t p[] = {
@@ -56,24 +39,14 @@ int (*check_format(const char *format))(va_list)
 
 }
 
-
-
 /**
-
  * _printf - function to print format
-
  * @format: list of arguments to printing
-
  * Return: Number of characters to printing
-
  */
 
-
-
 int _printf(const char *format, ...)
-
 {
-
 	unsigned int i = 0, len = 0, ibuf = 0;
 
 	va_list arguments;
