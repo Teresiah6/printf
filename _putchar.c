@@ -8,7 +8,11 @@
 
  * @c: The character to print
 
- * Return: On success 1, or -1 on error.
+ *
+
+ * Return: On success 1.
+
+ * On error, -1 is returned, and errno is set appropriately.
 
  */
 
