@@ -1,6 +1,9 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
+
+#define BUFFER_SIZE 1024
 
 /**
  * _printf - function to print format
@@ -14,6 +17,10 @@ int _printf(const char *format, ...)
 
 	int count = 0;
 
+	char buffer[BUFFER_SIZE];
+
+	int buffer_index = 0;
+
 	va_start(args, format);
 
 	while (*format != '\0')
@@ -26,7 +33,10 @@ int _printf(const char *format, ...)
 				case 'c':
 					{
 						char c = (char)va_arg(args, int);
-						putchar(c);
+						if (buffer_index < BUFFER_SIZE - 1)
+                    {
+                        buffer[buffer_index++] = c;
+                    }
 						count++;
 						break;
 					}
@@ -35,7 +45,10 @@ int _printf(const char *format, ...)
 						char *str = va_arg(args, char*);
 						while (*str != '\0')
 						{
-							putchar(*str);
+							 if (buffer_index < BUFFER_SIZE - 1)
+                        {
+                            buffer[buffer_index++] = *str;
+                        }
 							count++;
 							str++;
 						}
@@ -111,7 +124,10 @@ int _printf(const char *format, ...)
                 }
 				case '%':
 					{
-						putchar('%');
+						  if (buffer_index < BUFFER_SIZE - 1)
+                    {
+                        buffer[buffer_index++] = '%';
+                  }
 						count++;
 						break;
 					}
@@ -119,11 +135,27 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(*format);
+			 if (buffer_index < BUFFER_SIZE - 1)
+            {
+                buffer[buffer_index++] = *format;
+            }
 			count++;
 		}
 		format++;
+		
+		if (buffer_index >= BUFFER_SIZE - 1)
+        {
+            write(STDOUT_FILENO, buffer, buffer_index);
+            buffer_index = 0;
+        }
 	}
+
+	 if (buffer_index > 0)
+    {
+        write(STDOUT_FILENO, buffer, buffer_index);
+    }
+
+
 	va_end(args);
 	return (count);
 }
