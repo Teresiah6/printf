@@ -159,6 +159,31 @@ case 'S':
                     }
                     break;
                 }
+		 case 'p':
+                {
+			int i = 0;
+			char hex_string[20];
+                    void *ptr = va_arg(args, void*);
+                    if (buffer_index < BUFFER_SIZE - 1)
+                    {
+                        buffer[buffer_index++] = '0';
+                        buffer[buffer_index++] = 'x';
+
+                        sprintf(hex_string, "%p", ptr);
+
+                        while (hex_string[i] != '\0')
+                        {
+                            if (buffer_index < BUFFER_SIZE - 1)
+                            {
+                                buffer[buffer_index++] = hex_string[i];
+                            }
+                            count++;
+                            i++;
+                        }
+                    }
+                    count += 2;
+                    break;
+                }
 
 			}
 		}
