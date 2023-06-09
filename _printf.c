@@ -131,6 +131,35 @@ int _printf(const char *format, ...)
 						count++;
 						break;
 					}
+case 'S':
+                {
+                    char *str = va_arg(args, char*);
+                    while (*str != '\0')
+                    {
+                        if (*str < ' ' || *str >= 127)
+                        {
+                            if (buffer_index < BUFFER_SIZE - 4)
+                            {
+                                buffer[buffer_index++] = '\\';
+                                buffer[buffer_index++] = 'x';
+                                sprintf(&buffer[buffer_index], "%02X", *str);
+                                buffer_index += 2;
+                            }
+                            count += 4;
+                        }
+                        else
+                        {
+                            if (buffer_index < BUFFER_SIZE - 1)
+                            {
+                                buffer[buffer_index++] = *str;
+                            }
+                            count++;
+                        }
+                        str++;
+                    }
+                    break;
+                }
+
 			}
 		}
 		else
