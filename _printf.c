@@ -81,6 +81,34 @@ int _printf(const char *format, ...)
                     }
                     break;
                 }
+		 case 'u':
+                {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%u", num);
+                    count++;
+                    break;
+                }
+                case 'o':
+                {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%o", num);
+                    count++;
+                    break;
+                }
+                case 'x':
+               {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%x", num);
+                    count++;
+                    break;
+                }
+                case 'X':
+                {
+                    unsigned int num = va_arg(args, unsigned int);
+                    printf("%X", num);
+                    count++;
+                    break;
+                }
 				case '%':
 					{
 						putchar('%');
