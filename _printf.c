@@ -67,7 +67,20 @@ int _printf(const char *format, ...)
 					break;
 
 
-					}	
+					}
+				 case 'b':
+                {
+                    unsigned int num = va_arg(args, unsigned int);
+                    unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
+
+                    while (mask > 0)
+                    {
+                        putchar((num & mask) ? '1' : '0');
+                        count++;
+                        mask >>= 1;
+                    }
+                    break;
+                }
 				case '%':
 					{
 						putchar('%');
