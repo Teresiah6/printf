@@ -45,9 +45,28 @@ int _printf(const char *format, ...)
 				case 'i':
 					{
 						int num = va_arg(args, int);
-						printf("%d", num);
+						int i;
+						int digits[10];
+						int num_digits = 0;
+
+						if (num < 0) {
+							putchar('-');
+							count++;
+							num = -num;
+						}
+
+					for (i = 0; num > 0; i++) {
+						digits[i] = num % 10;
+						num /= 10;
+						num_digits++;
+					}
+					for (i = num_digits - 1; i >= 0; i--) {
+						putchar(digits[i] + '0');
 						count++;
-						break;
+					}
+					break;
+
+
 					}	
 				case '%':
 					{
